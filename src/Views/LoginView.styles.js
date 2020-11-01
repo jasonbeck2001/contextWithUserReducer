@@ -26,6 +26,12 @@ const styles = StyleSheet.create({
   warning: {
     color: Colors.red,
   },
+  noConnectivity: {
+    paddingTop: 80,
+    paddingBottom: 80,
+    paddingHorizontal: 25,
+    backgroundColor: 'hotpink',
+  },
 });
 
 export default styles;

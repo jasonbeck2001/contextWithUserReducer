@@ -14,9 +14,11 @@ import {
   useLoginDispatch,
   LoginActions,
 } from '../Contexts/LoginContext';
+import {useGlobalState} from '../Contexts/GlobalContext';
 
 const LoginView = () => {
   const {username, password, loginError, loggedIn} = useLoginState();
+  const {isConnectedToInternet} = useGlobalState();
   const loginDispatch = useLoginDispatch();
 
   const _onPressLogin = () => {
@@ -30,10 +32,6 @@ const LoginView = () => {
         payload: 'Incorrect username or password',
       });
     }
-  };
-
-  const _onPressSwitchColorScheme = () => {
-    globalDispatch({type: 'setVibrantColors', payload: true});
   };
 
   const _onPressLogout = () => {
@@ -57,7 +55,14 @@ const LoginView = () => {
                 useContext/useReducer/Immer
               </Text>
             </View>
-            {!loggedIn && (
+            {!isConnectedToInternet && (
+              <>
+                <Text style={styles.noConnectivity}>
+                  No Internet Connectivity
+                </Text>
+              </>
+            )}
+            {!loggedIn && isConnectedToInternet && (
               <>
                 <View style={styles.sectionContainer}>
                   <Text style={styles.sectionTitle}>Please Log In</Text>
@@ -102,7 +107,7 @@ const LoginView = () => {
                 </View>
               </>
             )}
-            {loggedIn && (
+            {loggedIn && isConnectedToInternet && (
               <>
                 <View style={styles.sectionContainer}>
                   <Text style={styles.sectionTitle}>
