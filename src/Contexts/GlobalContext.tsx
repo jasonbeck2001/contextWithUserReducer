@@ -10,7 +10,7 @@ interface draftTypes {
   isConnectedToInternet: boolean;
 }
 
-const {createContext} = React;
+const {createContext, useContext} = React;
 const intialState = {
   isConnectedToInternet: false,
 };
@@ -46,7 +46,7 @@ function GlobalProvider({children}) {
 }
 
 function useGlobalState() {
-  const context = React.useContext(GlobalStateContext);
+  const context = useContext(GlobalStateContext);
   if (context === undefined) {
     throw new Error('useGlobalState must be used within a GlobalProvider');
   }
@@ -54,7 +54,7 @@ function useGlobalState() {
 }
 
 function useGlobalDispatch() {
-  const context = React.useContext(GlobalDispatchContext);
+  const context = useContext(GlobalDispatchContext);
   if (context === undefined) {
     throw new Error('useGlobalDispatch must be used within a GlobalProvider');
   }

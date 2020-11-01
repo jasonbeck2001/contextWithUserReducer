@@ -13,7 +13,7 @@ interface draftTypes {
   loggedIn: boolean;
 }
 
-const {createContext} = React;
+const {createContext, useContext} = React;
 const initialState = {
   username: '',
   password: '',
@@ -69,7 +69,7 @@ function LoginProvider({children}) {
 }
 
 function useLoginState() {
-  const context = React.useContext(LoginStateContext);
+  const context = useContext(LoginStateContext);
   if (context === undefined) {
     throw new Error('useLoginState must be used within a LoginProvider');
   }
@@ -77,7 +77,7 @@ function useLoginState() {
 }
 
 function useLoginDispatch() {
-  const context = React.useContext(LoginDispatchContext);
+  const context = useContext(LoginDispatchContext);
   if (context === undefined) {
     throw new Error('useLoginDispatch must be used within a LoginProvider');
   }
