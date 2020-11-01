@@ -1,6 +1,11 @@
 import React from 'react';
 import {useImmerReducer} from 'use-immer';
 
+interface action {
+  type: string;
+  payload: unknown;
+}
+
 const {createContext} = React;
 const intialState = {
   isConnectedToInternet: false,
@@ -13,7 +18,7 @@ const GlobalActions = {
   isConnectedToInternet: 'IS_CONNECTED_TO_INTERNET',
 };
 
-function globalReducer(state: Object, action: Object) {
+function globalReducer(state: Object, action: action) {
   switch (action.type) {
     case GlobalActions.isConnectedToInternet: {
       return {...state, isConnectedToInternet: action.payload};
