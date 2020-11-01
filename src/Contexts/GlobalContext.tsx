@@ -3,7 +3,11 @@ import {useImmerReducer} from 'use-immer';
 
 interface action {
   type: string;
-  payload: unknown;
+  payload: any;
+}
+
+interface draftTypes {
+  isConnectedToInternet: boolean;
 }
 
 const {createContext} = React;
@@ -18,10 +22,11 @@ const GlobalActions = {
   isConnectedToInternet: 'IS_CONNECTED_TO_INTERNET',
 };
 
-function globalReducer(state: Object, action: action) {
+function globalReducer(draft: draftTypes, action: action) {
   switch (action.type) {
     case GlobalActions.isConnectedToInternet: {
-      return {...state, isConnectedToInternet: action.payload};
+      draft.isConnectedToInternet = action.payload;
+      return;
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);

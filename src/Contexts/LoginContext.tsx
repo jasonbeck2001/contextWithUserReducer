@@ -1,6 +1,18 @@
 import React from 'react';
 import {useImmerReducer} from 'use-immer';
 
+interface action {
+  type: string;
+  payload: any;
+}
+
+interface draftTypes {
+  username: string;
+  password: string;
+  loginError: string;
+  loggedIn: boolean;
+}
+
 const {createContext} = React;
 const initialState = {
   username: '',
@@ -21,7 +33,7 @@ const LoginDispatchContext = createContext(null);
 
 const {setUsername, setPassword, setLoginError, setLoggedIn} = LoginActions;
 
-function loginReducer(draft, action) {
+function loginReducer(draft: draftTypes, action: action) {
   switch (action.type) {
     case setUsername: {
       draft.username = action.payload;
